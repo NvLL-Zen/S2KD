@@ -1,0 +1,9 @@
+<svg id="CheckSVG" viewBox="0 0 113 113" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="CheckList">
+<rect id="CheckContainer" x="2" y="2" rx="10" fill="black" stroke="white" stroke-width="4" stroke-linejoin="round"/>
+<g id="Check">
+<line id="Line 1" x1="14.7678" y1="60.0937" x2="44.7678" y2="90.0937" stroke="white" stroke-width="5"/>
+<line id="Line 2" x1="41.2322" y1="90.0937" x2="97.8008" y2="33.5251" stroke="white" stroke-width="5"/>
+</g>
+</g>
+</svg>
