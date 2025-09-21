@@ -31,21 +31,30 @@
         
     </div>
     <div class="main">
-        <div id="inputEvents" class="events">
+        <div class="events">
             <div id="inputEventsEntry" class="eventsEntry">
-                <input placeholder="Event name..." type="text" id="inputEventsEntryName" class="eventsItem eventsEntryName">
+                <input placeholder="Insert task name" type="text" id="inputEventsEntryName" class="eventsItem eventsLeft eventsEntryName">
                 <div class="dpContainer eventsItem">
                     <DatePicker></DatePicker>
                 </div>
-                <button class="eventButton">
-                    +
-                </button>
+                <div class="eventButton">
+                    <button >
+                        +
+                    </button>
+                </div>
             </div>
             {#each tugass as tugas}
             <div class="eventsEntry">
-                <h4 class="eventsItem eventsEntryName">{tugas}</h4>
-                <h4 class="eventsItem eventsEntryDL">TAHUN/BULAN/HARI</h4>
+                <h4 class="eventsItem eventsLeft eventsList eventsEntryName">{tugas}</h4>
+                <h4 class="eventsItem eventsList eventsEntryDL">TAHUN/BULAN/HARI</h4>
+                <div class="eventButton">
+                    <button >
+                        ✓
+                    </button>
+                </div>
+                
             </div>
+            
             {/each}
         </div>
        
