@@ -2,8 +2,8 @@
     import { fade, scale } from 'svelte/transition';
     import { onMount, onDestroy } from 'svelte';
 
+    export let selectedDate = ''; // make sure you assign to this when picking a date
     let open = false;
-    let selectedDate = '';
     let today = new Date();
 
     let year = today.getFullYear();

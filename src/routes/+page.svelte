@@ -2,9 +2,21 @@
     import Checklist from "../components/checklist.svelte";
     import Calendar from "../components/calendar.svelte";
     import DatePicker from "../components/DatePicker.svelte";
-    import "../styles/style.css"
+    import "../styles/style.css";
+    import { tasks, addTask, removeTask } from '../stores/tasks.js';
+    import { fade, scale } from 'svelte/transition';
+    import { onMount, onDestroy } from 'svelte';
 
-    let tugass = ["Tugas bahasa arab", "U TE BE KA LANDOLWBOWA"]
+    let newName = '';
+    let selectedDate = '';
+
+    function handleAdd() {
+        console.log('Adding', { newName, selectedDate });
+        if (!newName.trim() || !selectedDate) return;
+        addTask(newName.trim(), selectedDate);
+        newName = '';
+        selectedDate = '';
+    }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,28 +45,27 @@
     <div class="main">
         <div class="events">
             <div id="inputEventsEntry" class="eventsEntry">
-                <input placeholder="Insert task name" type="text" id="inputEventsEntryName" class="eventsItem eventsLeft eventsEntryName">
+                <input placeholder="Insert task name" type="text" id="inputEventsEntryName" class="eventsItem eventsLeft eventsEntryName" bind:value={newName}>
                 <div class="dpContainer eventsItem">
-                    <DatePicker></DatePicker>
+                    <DatePicker bind:selectedDate={selectedDate} />
                 </div>
                 <div class="eventButton">
-                    <button >
+                    <button type="button" on:click={handleAdd}>
                         +
                     </button>
                 </div>
             </div>
-            {#each tugass as tugas}
+            {#each $tasks as task, i}
             <div class="eventsEntry">
-                <h4 class="eventsItem eventsLeft eventsList eventsEntryName">{tugas}</h4>
-                <h4 class="eventsItem eventsList eventsEntryDL">TAHUN/BULAN/HARI</h4>
+                <h4 class="eventsItem eventsLeft eventsList eventsEntryName">{task.name}</h4>
+                <h4 class="eventsItem eventsList eventsEntryDL">{task.deadline}</h4>
                 <div class="eventButton">
-                    <button >
+                    <button type="button" on:click={() => removeTask(i)}>
                         ✓
                     </button>
                 </div>
                 
             </div>
-            
             {/each}
         </div>
        
@@ -62,5 +73,3 @@
             <Calendar></Calendar>
         </div>
     </div>
-    
-    
