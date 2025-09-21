@@ -3,10 +3,7 @@ import { writable } from 'svelte/store';
 
 const STORAGE_KEY = 'tasks';
 
-const initial = [
-  { name: 'Tugas bahasa arab', deadline: '2024-01-15' },
-  { name: 'U TE BE KA LANDOLWBOWA', deadline: '2024-01-20' }
-];
+const initial = [];
 
 function load() {
   if (typeof localStorage === 'undefined') return initial;
