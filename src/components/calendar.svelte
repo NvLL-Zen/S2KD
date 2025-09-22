@@ -1,77 +1,102 @@
 <script>
     import { startOfMonth, endOfMonth, eachDayOfInterval, format } from "date-fns";
-  
+    import { tasks } from "../stores/tasks.js"; // Import the tasks store
+    import { derived } from "svelte/store";
+
     let currentMonth = new Date();
-    let events = [
-      { date: "2025-09-05", title: "Event A" },
-      { date: "2025-09-14", title: "Event B" }
-    ];
-  
+
+    // Derive events from the tasks store (tasks store keeps YYYY/MM/DD)
+    const events = derived(tasks, $tasks =>
+        $tasks
+            .filter(t => t.deadline)
+            .map(t => {
+                // Normalize any legacy hyphen form to slash, then create hyphen form for matching
+                const slash = t.deadline.replace(/-/g,'/');
+                const hyphen = slash.replace(/\//g,'-');
+                return {
+                    date: hyphen, // yyyy-MM-dd for comparison
+                    title: t.name
+                };
+            })
+    );
+
     let days = eachDayOfInterval({
-      start: startOfMonth(currentMonth),
-      end: endOfMonth(currentMonth)
+        start: startOfMonth(currentMonth),
+        end: endOfMonth(currentMonth)
     });
-  
-    function getEvents(day) {
-      return events.filter((e) => e.date === format(day, "yyyy-MM-dd"));
-    }
-  </script>
-  
-  <div class="calendar">
+
+    // Reactive statement to filter events for each day
+    $: eventsByDay = days.map(day => {
+        const dayString = format(day, "yyyy-MM-dd");
+        return {
+            day,
+            events: $events.filter(e => e.date === dayString)
+        };
+    });
+
+    // Debugging logs
+    $: console.log($tasks); // Log tasks store
+    $: console.log($events); // Log derived events
+    $: console.log(eventsByDay); // Log eventsByDay array
+</script>
+
+<div class="calendar">
     <div class="header">{format(currentMonth, "MMMM yyyy")}</div>
     <div class="grid">
-      {#each days as day}
-        <div class="day">
-          <div class="date">{format(day, "d")}</div>
-          {#each getEvents(day) as ev}
-            <div class="event"></div>
-          {/each}
-        </div>
-      {/each}
+        {#each eventsByDay as { day, events }}
+            <div class="day">
+                <div class="date">{format(day, "d")}</div>
+                {#each events as ev}
+                    <div class="event" title={ev.title}></div>
+                {/each}
+            </div>
+        {/each}
     </div>
-  </div>
-  
-  <style>
+</div>
+
+<style>
     .calendar {
-      width: 100%;
-      height: 80%;
-       /* small box style */
-      font-family: sans-serif;
-      background: black;
-      border: 2.5px solid #fff;
-      border-radius: 8px;
-      overflow: hidden;
+        width: 100%;
+        height: 90%;
+        font-family: "JetBrains Mono", monospace;
+        background: black;
+        border: 2.5px solid #fff;
+        border-radius: 8px;
+        overflow: hidden;
     }
     .header {
-      text-align: center;
-      font-weight: bold;
-      padding: 0.5rem;
-      background: black;
-      height: 15%;
+        text-align: center;
+        font-weight: bold;
+        padding: 0.5rem;
+        background: black;
+        height: 15%;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.813rem;
     }
     .grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      height: 85%;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        height:85%;
     }
     .day {
-      border: 2.5px solid #eee;
-      min-height: 50px;
-      padding: 2px;
-      position: relative;
+        border: 2.5px solid #eee;
+        min-height: 50px;
+        padding: 2px;
+        position: relative;
     }
     .date {
-      font-size: 1rem;
-      color: #fff;
+        font-size: 1rem;
+        color: #fff;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
     }
     .event {
-      width: 6px;
-      height: 6px;
-      background: #4f46e5;
-      border-radius: 50%;
-      position: absolute;
-      bottom: 4px;
-      left: 4px;
+        width: 10px; /* Temporarily increased size for visibility */
+        height: 10px;
+        background: red; /* Temporarily changed to red for visibility */
+        border-radius: 50%;
+        position: absolute;
+        bottom: 4px;
+        left: 4px;
     }
-  </style>
-  
+</style>

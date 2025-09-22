@@ -25,8 +25,19 @@ if (typeof localStorage !== 'undefined') {
   });
 }
 
+// One‑time inline migration: convert any previously stored hyphen dates to slash dates
+tasks.update(list =>
+  list.map(t =>
+    t.deadline && t.deadline.includes('-') && !t.deadline.includes('/')
+      ? { ...t, deadline: t.deadline.replace(/-/g, '/') }
+      : t
+  )
+);
+
 export function addTask(name, deadline) {
-  tasks.update(list => [...list, { name, deadline }]);
+  // Canonical storage: YYYY/MM/DD
+  const normalized = deadline ? deadline.replace(/-/g, '/') : '';
+  tasks.update(list => [...list, { name, deadline: normalized }]);
 }
 
 export function removeTask(index) {

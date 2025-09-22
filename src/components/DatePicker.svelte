@@ -2,7 +2,9 @@
     import { fade, scale } from 'svelte/transition';
     import { onMount, onDestroy } from 'svelte';
 
-    export let selectedDate = ''; // make sure you assign to this when picking a date
+    export let selectedDate = ''; // Selected date
+    export let tasks = []; // Array of tasks with `deadline` in YYYY-MM-DD
+
     let open = false;
     let today = new Date();
 
@@ -50,7 +52,7 @@
     }
 
     let removeListener = null;
-    
+
     function manageListener() {
         if (open) {
             window.addEventListener('mousedown', handleClickOutside);
@@ -68,10 +70,20 @@
             if (removeListener) removeListener();
         };
     });
-    
+
     onDestroy(() => {
         if (removeListener) removeListener();
     });
+
+    // Helper function to check if a date has tasks
+    function hasTasks(y, m, d) {
+        const target = `${y}/${String(m+1).padStart(2,'0')}/${String(d).padStart(2,'0')}`;
+        return tasks.some(task => {
+            if (!task.deadline) return false;
+            const dl = task.deadline.replace(/-/g,'/'); // tolerate old stored hyphen dates
+            return dl === target;
+        });
+    }
 </script>
 
 <style>
@@ -79,6 +91,7 @@
         position: relative;
         display: inline-block;
         width: 180px;
+        font-family: "JetBrains Mono", monospace;
     }
     .datepicker-input {
         width: 100%;
@@ -87,10 +100,11 @@
         color: white;
         border: 1px solid white;
         border-radius: 5px;
-        font-size: 1em;
+        font-size: clamp(0.65rem, 1.3vw, 0.813rem);
         cursor: pointer;
         transition: border 0.2s;
         text-align: center;
+        font-family: "JetBrains Mono", monospace;
     }
     .datepicker-input:focus {
         outline: none;
@@ -109,6 +123,7 @@
         box-shadow: 0 4px 16px rgba(0,0,0,0.7);
         z-index: 10;
         padding: 16px;
+        font-family: "JetBrains Mono", monospace;
     }
     .header {
         display: flex;
@@ -116,14 +131,16 @@
         align-items: center;
         margin-bottom: 8px;
         text-align: center;
+        font-size: clamp(0.813rem, 1.625vw, 1.138rem);
+        font-family: "JetBrains Mono", monospace;
     }
     .arrow-btn {
         background: none;
         color: white;
         border: none;
-        font-size: 1.2em;
+        font-size: clamp(0.813rem, 1.625vw, 1.138rem);
         cursor: pointer;
-        padding: 2px 8px;
+        padding: 0.25rem 0.5rem;
         border-radius: 3px;
         transition: background 0.2s;
     }
@@ -133,12 +150,13 @@
     .calendar {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        gap: 4px;
+        gap: 0.25rem;
     }
     .day, .date {
         text-align: center;
-        padding: 4px 0;
-        font-size: 0.95em;
+        padding: 0.25rem 0;
+        font-size: clamp(0.65rem, 1.3vw, 0.813rem);
+        font-family: "JetBrains Mono", monospace;
     }
     .day {
         font-weight: bold;
@@ -147,6 +165,7 @@
     .date {
         cursor: pointer;
         border-radius: 4px;
+        position: relative;
         transition: background 0.2s, color 0.2s;
     }
     .date:hover {
@@ -157,6 +176,16 @@
         background: #fff;
         color: #000;
         font-weight: bold;
+    }
+    .task-dot {
+        position: absolute;
+        bottom: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 6px;
+        height: 6px;
+        background: red;
+        border-radius: 50%;
     }
 </style>
 
@@ -193,7 +222,12 @@
                         class="date {selectedDate === `${year}/${String(month+1).padStart(2,'0')}/${String(d).padStart(2,'0')}` ? 'selected' : ''}"
                         on:click={() => selectDate(year, month, d)}
                         aria-label={`Select ${year}/${String(month+1).padStart(2,'0')}/${String(d).padStart(2,'0')}`}
-                    >{d}</button>
+                    >
+                        {d}
+                        {#if hasTasks(year, month, d)}
+                            <span class="task-dot"></span>
+                        {/if}
+                    </button>
                 {/each}
             </div>
         </div>
