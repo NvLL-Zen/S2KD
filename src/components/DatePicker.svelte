@@ -91,24 +91,26 @@
         position: relative;
         display: inline-block;
         width: 180px;
-        font-family: "JetBrains Mono", monospace;
+        font-family: inherit;
     }
     .datepicker-input {
         width: 100%;
         padding: 8px 12px;
-        background: black;
+        background: transparent;
         color: white;
-        border: 1px solid white;
+        border: none;
         border-radius: 5px;
         font-size: clamp(0.65rem, 1.3vw, 0.813rem);
+        scale: 1.45;
         cursor: pointer;
         transition: border 0.2s;
         text-align: center;
-        font-family: "JetBrains Mono", monospace;
+        font-family: inherit;
+        outline: none;
     }
     .datepicker-input:focus {
         outline: none;
-        border: 1.5px solid #fff;
+        /* border: 1.5px solid #fff; */
     }
     .dropdown {
         position: absolute;
@@ -123,7 +125,7 @@
         box-shadow: 0 4px 16px rgba(0,0,0,0.7);
         z-index: 10;
         padding: 16px;
-        font-family: "JetBrains Mono", monospace;
+        font-family: inherit;
     }
     .header {
         display: flex;
@@ -132,7 +134,7 @@
         margin-bottom: 8px;
         text-align: center;
         font-size: clamp(0.813rem, 1.625vw, 1.138rem);
-        font-family: "JetBrains Mono", monospace;
+        font-family: inherit;
     }
     .arrow-btn {
         background: none;
@@ -156,7 +158,7 @@
         text-align: center;
         padding: 0.25rem 0;
         font-size: clamp(0.65rem, 1.3vw, 0.813rem);
-        font-family: "JetBrains Mono", monospace;
+        font-family: inherit;
     }
     .day {
         font-weight: bold;

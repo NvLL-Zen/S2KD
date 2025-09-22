@@ -34,12 +34,18 @@ tasks.update(list =>
   )
 );
 
+// Ensure existing tasks get an id (one-time)
+tasks.update(list =>
+  list.map((t, i) => t.id ? t : { ...t, id: `${Date.now()}_${i}` })
+);
+
 export function addTask(name, deadline) {
   // Canonical storage: YYYY/MM/DD
   const normalized = deadline ? deadline.replace(/-/g, '/') : '';
-  tasks.update(list => [...list, { name, deadline: normalized }]);
+  const task = { id: `${Date.now()}_${Math.random().toString(36).slice(2)}`, name, deadline: normalized };
+  tasks.update(list => [...list, task]);
 }
 
-export function removeTask(index) {
-  tasks.update(list => list.filter((_, i) => i !== index));
+export function removeTask(id) {
+  tasks.update(list => list.filter(t => t.id !== id));
 }

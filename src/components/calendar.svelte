@@ -58,7 +58,7 @@
     .calendar {
         width: 100%;
         height: 90%;
-        font-family: "JetBrains Mono", monospace;
+        font-family: "Rajdhani", sans-serif;
         background: black;
         border: 2.5px solid #fff;
         border-radius: 8px;
@@ -66,12 +66,17 @@
     }
     .header {
         text-align: center;
-        font-weight: bold;
+        font-weight: 700;
         padding: 0.5rem;
         background: black;
         height: 15%;
-        font-family: "JetBrains Mono", monospace;
+        font-family: inherit;
         font-size: 0.813rem;
+    }
+    .date {
+        font-size: 0.65rem;
+        color: #fff;
+        font-family: inherit;
     }
     .grid {
         display: grid;
@@ -83,12 +88,6 @@
         min-height: 50px;
         padding: 2px;
         position: relative;
-    }
-    .date {
-        font-size: 1rem;
-        color: #fff;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.65rem;
     }
     .event {
         width: 10px; /* Temporarily increased size for visibility */

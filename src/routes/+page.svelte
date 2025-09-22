@@ -20,7 +20,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <div class="top">
         <div class="title">
@@ -55,12 +55,12 @@
                     </button>
                 </div>
             </div>
-            {#each $tasks as task, i}
-            <div class="eventsEntry">
+            {#each $tasks as task (task.id)}
+            <div class="eventsEntry" in:fade={{ duration: 200 }} out:fade={{ duration: 160 }}>
                 <h4 class="eventsItem eventsLeft eventsList eventsEntryName">{task.name}</h4>
                 <h4 class="eventsItem eventsList eventsEntryDL">{task.deadline}</h4>
                 <div class="eventButton">
-                    <button type="button" on:click={() => removeTask(i)}>
+                    <button type="button" on:click={() => removeTask(task.id)}>
                         ✓
                     </button>
                 </div>
