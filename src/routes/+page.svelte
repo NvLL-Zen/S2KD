@@ -8,6 +8,8 @@
     import { fade, scale } from 'svelte/transition';
     import { onMount, onDestroy } from 'svelte';
 
+    export let data;
+
     let newName = '';
     let selectedDate = '';
 
@@ -33,9 +35,15 @@
             </p>
         </div>
         <h2 id="account">
-            <button id="signIn">
-                Sign In
-            </button>
+            {#if data.session}
+                <a href="/auth/signout" title="Click to sign out">
+                    <button id="signIn">{data.session.user.name}</button>
+                </a>
+            {:else}
+                <a href="/auth/signin">
+                    <button id="signIn">Sign In</button>
+                </a>
+            {/if}
         </h2>
     
         <div class="quotesContainer">
