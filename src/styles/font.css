@@ -1,0 +1,25 @@
+:root {
+    --font-size-body: clamp(0.776rem, 1.316vw, 0.979rem);
+    --font-size-h1: clamp(1.755rem, 3.51vw, 2.633rem);
+    --font-size-h2: clamp(1.553rem, 3.071vw, 2.194rem);
+    --font-size-p: clamp(0.878rem, 1.755vw, 1.098rem);
+    --font-size-input: clamp(0.878rem, 1.755vw, 1.098rem);
+    --font-size-input-focus: clamp(0.79rem, 1.646vw, 0.987rem);
+    --font-size-event-button: clamp(1.098rem, 2.194vw, 1.536rem);
+    --font-size-signin: clamp(0.987rem, 1.974vw, 1.316rem);
+
+    /* Calendar font sizes */
+    --font-size-calendar-header: 1.016rem;
+    --font-size-calendar-month: 1.2rem;
+    --font-size-calendar-arrow: clamp(1.016rem, 2.031vw, 1.423rem);
+    --font-size-calendar-date: 0.813rem;
+
+    /* DatePicker font sizes */
+    --font-size-datepicker-input: clamp(0.65rem, 1.3vw, 0.813rem);
+    --font-size-datepicker-header: clamp(0.813rem, 1.625vw, 1.138rem);
+    --font-size-datepicker-arrow: clamp(0.813rem, 1.625vw, 1.138rem);
+    --font-size-datepicker-day-date: clamp(0.65rem, 1.3vw, 0.813rem);
+
+    /* Quote font size */
+    --font-size-quote: clamp(0.66rem, 1.32vw, 0.96rem);
+}

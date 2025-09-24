@@ -100,7 +100,7 @@
         color: white;
         border: none;
         border-radius: 5px;
-        font-size: clamp(0.65rem, 1.3vw, 0.813rem);
+        font-size: var(--font-size-datepicker-input);
         scale: 1.45;
         cursor: pointer;
         transition: border 0.2s;
@@ -133,14 +133,14 @@
         align-items: center;
         margin-bottom: 8px;
         text-align: center;
-        font-size: clamp(0.813rem, 1.625vw, 1.138rem);
+        font-size: var(--font-size-datepicker-header);
         font-family: inherit;
     }
     .arrow-btn {
         background: none;
         color: white;
         border: none;
-        font-size: clamp(0.813rem, 1.625vw, 1.138rem);
+        font-size: var(--font-size-datepicker-arrow);
         cursor: pointer;
         padding: 0.25rem 0.5rem;
         border-radius: 3px;
@@ -157,7 +157,7 @@
     .day, .date {
         text-align: center;
         padding: 0.25rem 0;
-        font-size: clamp(0.65rem, 1.3vw, 0.813rem);
+        font-size: var(--font-size-datepicker-day-date);
         font-family: inherit;
     }
     .day {

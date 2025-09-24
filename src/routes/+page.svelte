@@ -2,6 +2,7 @@
     import Checklist from "../components/checklist.svelte";
     import Calendar from "../components/calendar.svelte";
     import DatePicker from "../components/DatePicker.svelte";
+    import Quotes from "../components/quotes.svelte";
     import "../styles/style.css";
     import { tasks, addTask, removeTask } from '../stores/tasks.js';
     import { fade, scale } from 'svelte/transition';
@@ -37,15 +38,18 @@
             </button>
         </h2>
     
-        <h2>
-            "Quotes penyemangat hidup" - Ojan
-        </h2>
+        <div class="quotesContainer">
+            <Quotes>
+            </Quotes>
+            <h2 class="quotesOrigin">-Seseorang</h2>
+        </div>
+        
         
     </div>
     <div class="main">
         <div class="events">
             <div id="inputEventsEntry" class="eventsEntry">
-                <input placeholder="Insert task name" type="text" id="inputEventsEntryName" class="eventsItem eventsLeft eventsEntryName" bind:value={newName}>
+                <input placeholder="Nama tugas" type="text" id="inputEventsEntryName" class="eventsItem eventsLeft eventsEntryName" bind:value={newName}>
                 <div class="dpContainer eventsItem">
                     <DatePicker bind:selectedDate={selectedDate} tasks={$tasks} />
                 </div>

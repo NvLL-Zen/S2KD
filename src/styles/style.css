@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
+@import url('./font.css');
 
 * {
     background-color: black;
@@ -9,12 +10,14 @@
     font-weight: 600;
     box-sizing: border-box;
     transition: all 0.2s ease;
+
+    /* border: 1px solid red; */
 }
 
 body {
     font-family: "Rajdhani", sans-serif;
     font-weight: 600;
-    font-size: clamp(0.776rem, 1.316vw, 0.979rem);
+    font-size: var(--font-size-body);
 }
 
 h1, h2, p, h4, button, input {
@@ -23,17 +26,17 @@ h1, h2, p, h4, button, input {
 }
 
 h1 {
-    font-size: clamp(1.755rem, 3.51vw, 2.633rem);
+    font-size: var(--font-size-h1);
     font-weight: 800;
 }
 
 h2 {
-    font-size: clamp(1.553rem, 3.071vw, 2.194rem);
+    font-size: var(--font-size-h2);
     font-weight: 600;
 }
 
 p {
-    font-size: clamp(0.878rem, 1.755vw, 1.098rem);
+    font-size: var(--font-size-p);
     font-weight: 600;
 }
 
@@ -43,8 +46,30 @@ p {
     padding: 25px;
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content:space-between;
+}
+
+#account {
+    width: fit-content;
+    height: fit-content;
+    margin-left: 8%;
+}
+
+.quotesContainer {
+    width: 30%;
+    border: 1px solid white;
+    color: black;
+    background-color: white;
+    border-radius: 7.5px;
+    padding: 5px;
+}
+
+.quotesOrigin {
+    font-size: var(--font-size-quote);
+    text-align: right;
+    color: inherit;
+    background-color: inherit;
 }
 
 .main {
@@ -53,19 +78,20 @@ p {
 }
 
 .events {
-    width: 75%;
+    width: 50%;
     padding: 25px;
+    padding-left: 35px;
     display: flex;
     flex-direction: column;
 }
 
 #inputEventsEntryName {
-    font-size: clamp(0.878rem, 1.755vw, 1.098rem);
+    font-size: var(--font-size-input);
     outline: none;
 }
 
 #inputEventsEntryName:focus {
-    font-size: clamp(0.79rem, 1.646vw, 0.987rem);
+    font-size: var(--font-size-input-focus);
     outline: none;
     border-right: 1px solid white;
 }
@@ -75,7 +101,7 @@ p {
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: clamp(0.878rem, 1.755vw, 1.098rem);
+    font-size: var(--font-size-p);
     margin-top: 15px;
 }
 
@@ -87,7 +113,7 @@ p {
     padding-right: 5px;
     padding-left: 5px;
    
-    border: 1px solid white;
+    border: 2.5px solid white;
     border-right: none;
 }
 
@@ -105,13 +131,13 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(1.098rem, 2.194vw, 1.536rem);
-    border: 1px solid white;
+    font-size: var(--font-size-event-button);
+    border: 2.5px solid white;
     border-radius: 0px 8px 8px 0px;
 }
 
 button {
-    font-size: clamp(1.098rem, 2.194vw, 1.536rem);
+    font-size: var(--font-size-event-button);
     width: 100%;
     height: 100%;
     display: flex;
@@ -146,8 +172,9 @@ button:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 25%;
-    padding: 3%;
+    width: 50%;
+    padding: 25px;
+    padding-left: 35px;
 }
 
 #CheckSVG {
@@ -158,15 +185,10 @@ button:hover {
     height: 100%;
 }
 
-#account {
-    width: fit-content;
-    height: fit-content;
-}
-
 #signIn {
     width: 100%;
     height: 100%;
-    font-size: clamp(0.987rem, 1.974vw, 1.316rem);
+    font-size: var(--font-size-signin);
     border: 1px solid white;
     border-radius: 0px;
     font-weight: 700;
