@@ -1,1 +1,2 @@
-export { handle } from "$lib/auth";
+import 'dotenv/config';
+export { handle } from '$lib/auth';
