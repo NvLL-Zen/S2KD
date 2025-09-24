@@ -1,1 +1,1 @@
-export { GET, POST } from "../../../hooks.server.js";
+export { GET, POST } from "../../../lib/auth.js";

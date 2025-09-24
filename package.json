@@ -31,6 +31,7 @@
     "@auth/sveltekit": "^1.10.0",
     "@internationalized/date": "^3.9.0",
     "date-fns": "^4.1.0",
+    "dotenv": "^17.2.2",
     "shadcn-svelte": "^1.0.7",
     "svelte-calendar": "^3.1.6"
   }
